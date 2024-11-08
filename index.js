@@ -14,6 +14,7 @@ const waitForUrl = async (url, MAX_TIMEOUT, { headers }) => {
     }
   }
   core.setFailed(`Timeout reached: Unable to connect to ${url}`);
+  process.exit();
 };
 
 const run = async () => {
@@ -23,12 +24,14 @@ const run = async () => {
       core.setFailed(
         "Action must be run in conjunction with the `pull_request` event"
       );
+      process.exit();
     }
     const MAX_TIMEOUT = Number(core.getInput("max_timeout")) || 60;
     const siteName = core.getInput("site_name");
     const basePath = core.getInput("base_path");
     if (!siteName) {
       core.setFailed("Required field `site_name` was not provided");
+      process.exit();
     }
     const url = `https://deploy-preview-${PR_NUMBER}--${siteName}.netlify.app${basePath}`;
     core.setOutput("url", url);
@@ -40,6 +43,7 @@ const run = async () => {
     });
   } catch (error) {
     core.setFailed(error.message);
+    process.exit();
   }
 };
 
