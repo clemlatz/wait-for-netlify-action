@@ -1,4 +1,4 @@
-name: "Wait for Netlify"
+name: "Wait for Netlify (with pr number)"
 description: "Wait for Netlify Deploy Preview to complete"
 branding:
   icon: "clock"
@@ -7,6 +7,9 @@ inputs:
   site_name:
     description: "The Netlify site name to test against"
     required: true
+  pr_number:
+    description: "The PR number of the deploy preview (optional)"
+    required: false
   request_headers:
     description: "Stringified HTTP Header object key/value pairs to send in requests"
     required: false

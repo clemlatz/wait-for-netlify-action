@@ -18,7 +18,7 @@ const waitForUrl = async (url, MAX_TIMEOUT, { headers }) => {
 
 const run = async () => {
   try {
-    const PR_NUMBER = github.context.payload.number;
+    const PR_NUMBER = core.getInput("pr_number") ?? github.context.payload.number;
     if (!PR_NUMBER) {
       core.setFailed(
         "Action must be run in conjunction with the `pull_request` event"
